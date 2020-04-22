@@ -31,13 +31,14 @@ let optimization = {
 
 module.exports = (env, argv) => {
   function babelConf() {
-    if(argv.mode === 'production') {
+    if(argv.mode === 'development') {
       return {
         test: /\.js$/i,
         exclude: /(node_modules)/,
         loader: 'babel-loader',
         options: {
-          presets: ['@babel/preset-env']
+          presets: ['@babel/preset-env'],
+          plugins: ['@babel/plugin-proposal-class-properties']
         }
       }
     } else {

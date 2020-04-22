@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[2],{31:function(e,n,t){"use strict";t.r(n);n.default=function(){var e=document.createElement("img");e.src="./images/waterfall.jpg",document.body.appendChild(e)}}}]);
