@@ -1,5 +1,6 @@
-import LoginModel from "./LoginModel";
-import LoginView from "./LoginView";
+import '../../styles/header.css';
+import LoginModel from './LoginModel';
+import LoginView from './LoginView';
 
 class LoginViewModel {
   constructor() {
@@ -10,7 +11,7 @@ class LoginViewModel {
       userLogout: this.userLogout.bind(this), // using this in View it points oon LoginView component
     }); // However should be pointed an LoginViewModel
 
-    this.loginInput = "";
+    this.loginInput = '';
     // First of all check if the User is Authenticated To Load appropriate component
     this.checkAuthStatus();
   }
