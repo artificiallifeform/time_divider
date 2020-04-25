@@ -90,3 +90,13 @@
 .input-big {
   width: 100%;
 }
+
+.router-link {
+  text-decoration: none;
+  font-size: 1.15rem;
+  color: var(--btnBackground);
+}
+
+.router-link.active {
+  border-bottom: 3px solid var(--borderColor);
+}
