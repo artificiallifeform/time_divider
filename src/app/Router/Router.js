@@ -37,7 +37,7 @@ class Router {
 
   linkEvent = (e) => {
     e.preventDefault();
-    console.log(e);
+
     this.path = e.target.getAttribute('href');
 
     this.highlightActiveLink(e.target);
@@ -57,7 +57,7 @@ class Router {
     const { components, workSpace } = this;
     let Screen = null;
     for (let element of components) {
-      if (element.path === path) Screen = new element.component();
+      if (element.path === path) Screen = element.component;
     }
     let screenContent = Screen.getMarkup();
     workSpace.removeChild(workSpace.childNodes[0]);

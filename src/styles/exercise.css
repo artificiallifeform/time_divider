@@ -1,0 +1,112 @@
+.exercise-instance {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  align-items: center;
+}
+
+.exercise {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+.exercise .btn.big {
+  margin-bottom: 1rem;
+}
+
+.exercise .error {
+  position: absolute;
+  left: 50%;
+  top: 4rem;
+  transform: translateX(-50%);
+  color: var(--danger);
+  background-color: #ffd2d2;
+  font-size: 1.2rem;
+  font-weight: 500;
+  border-radius: var(--borderRad);
+  cursor: pointer;
+  transition: 0.1s ease;
+}
+.exercise .error.show {
+  padding: 0.2rem 1.8rem;
+}
+
+.save-btn {
+  background: var(--btnBackground);
+  border: none;
+  position: relative;
+  line-height: 0;
+  cursor: pointer;
+  padding: 0.3rem;
+  border-radius: var(--borderRad);
+  transition: transform 0.15s ease;
+  height: 100%;
+}
+.save-btn:hover {
+  transform: scale(1.1);
+}
+
+.save-i {
+  width: 1.3rem;
+}
+
+.not-saved {
+  animation: blink 1s linear infinite;
+}
+
+.exercise-instance {
+  margin-top: 2rem;
+}
+
+.exercise-instance .btn {
+  padding: 0.2rem 0.5rem;
+  cursor: pointer;
+}
+
+.exercise-instance .danger {
+  background: var(--danger);
+  margin: 0 0.5rem;
+}
+
+.exercise-instance .disabled {
+  background: rgba(243, 32, 19, 0.3);
+  cursor: not-allowed;
+}
+
+.exercise-instance .timer {
+  font-size: 1.3rem;
+}
+
+.exercise-input {
+  width: 200px;
+  border: 2px solid transparent;
+  padding: 0.5rem 0.6rem;
+  border-bottom: 2px solid var(--borderColor);
+  border-radius: var(--borderRad);
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  transition: border 0.1s ease;
+  margin: 0 0.5rem;
+}
+
+.exercise-input:focus {
+  outline: none;
+  border: 2px solid var(--borderColor);
+  border-radius: var(--borderRad);
+}
+
+@keyframes blink {
+  0% {
+    box-shadow: 0px 0px 0px #000;
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 3px 3px 5px #000;
+    transform: scale(1.05);
+  }
+  100% {
+    box-shadow: 0px 0px 0px #000;
+    transform: scale(1.05);
+  }
+}

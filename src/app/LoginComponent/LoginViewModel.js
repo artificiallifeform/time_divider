@@ -2,6 +2,10 @@ import '../../styles/header.css';
 import LoginModel from './LoginModel';
 import LoginView from './LoginView';
 
+import ExerciseModel from '../ExerciseComponent/ExerciseModel';
+
+import ExerciseViewModel from '../ExerciseComponent/ExerciseViewModel';
+
 class LoginViewModel {
   constructor() {
     this.loginModel = new LoginModel();
@@ -14,6 +18,8 @@ class LoginViewModel {
     this.loginInput = '';
     // First of all check if the User is Authenticated To Load appropriate component
     this.checkAuthStatus();
+
+    this.externalMethods = {};
   }
 
   async checkAuthStatus() {
@@ -34,13 +40,20 @@ class LoginViewModel {
   userLogout() {
     this.loginModel.clearUser();
     this.loginView.authFailed();
+    this.externalMethods.clearExercises();
   }
 
   async formSubmit() {
     const user = await this.loginModel.submitLogin(this.loginInput);
     if (user) {
       this.loginView.authSucceed(user.username);
+      // Fetch Request From Exercise Model
+      this.externalMethods.getExercises();
     }
+  }
+
+  setExternalMethods(methods) {
+    this.externalMethods = methods;
   }
 }
 
