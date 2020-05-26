@@ -22,10 +22,10 @@ class ExerciseInstanceVM {
     );
 
     // Each Exercise has it's own unique identified
-    this.optionId = this.options.optionId || null;
+    this.exercise_id = this.options.optionId || null;
 
-    // console.log(this.optionId);
-    this.exerciseInput = '';
+    console.log(this.options.input);
+    this.exerciseInput = this.options.input || '';
   }
 
   getMarkup() {
@@ -34,9 +34,11 @@ class ExerciseInstanceVM {
 
   inputChange(value) {
     this.exerciseInput = value;
+    console.log(this.exercise_id);
   }
 
   async saveBtnClick() {
+    console.log(this.exercise_id);
     // TODO:
     // TODO:  To Make another method OR to update existing
     // TODO:  For beeing able to save current exercise
@@ -44,17 +46,22 @@ class ExerciseInstanceVM {
     const seconds = this.exerciseTimer.getAllSeconds();
     const response = await this.exerciseInstanceModel.modelSaveHandler(
       this.exerciseInput,
-      seconds
+      seconds,
+      this.exercise_id
     );
 
-    console.log('Ive clicked on exercise with id of: ' + this.optionId);
-
-    if (response) {
-      // When Error occurs somewhere in Exercise Instance
-      // Updating Erorr Obj through Error handler
-      // Which was passed down to An ExerciseInstance From Exercise-Parent Component
-      this.errorHandler(response);
+    switch (response.type) {
+      case 'success':
+        console.log('Success switch', response);
+        this.exercise_id = response.payload.exercise_id;
+        return;
+      case 'error':
+        // When Error occurs somewhere in Exercise Instance
+        // Updating Erorr Obj through Error handler
+        // Which was passed down to An ExerciseInstance From Exercise-Parent Component
+        return this.errorHandler(response.payload);
     }
+    console.log('Ive clicked on exercise with id of: ' + this.exercise_id);
   }
 
   startBtnClick() {

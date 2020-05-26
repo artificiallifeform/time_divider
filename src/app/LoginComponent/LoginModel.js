@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { setJsonStorage, getJsonStorage } from '../utils/storageParser';
 
 class LoginModel {
   constructor() {
@@ -7,7 +8,7 @@ class LoginModel {
         'Content-Type': 'application/json',
       },
     };
-    this.url = 'http://localhost:5000/auth';
+    this.url = 'http://localhost:5000/auth/';
   }
 
   async submitLogin(username) {
@@ -18,15 +19,22 @@ class LoginModel {
 
     try {
       let response = await axios.post(this.url, { username }, this.config);
-      localStorage.setItem('username', response.data.user.username);
-      return response.data.user;
+      setJsonStorage('user', {
+        username: response.data.username,
+        id: response.data.id,
+      });
+      console.log(response.data, 'Fetching user');
+      const user = {
+        username: response.data.username,
+      };
+      return user;
     } catch (err) {
       throw Error('Something wrong with an API');
     }
   }
 
   checkForToken() {
-    let token = localStorage.getItem('username');
+    let token = getJsonStorage('user').username;
     if (token) {
       return this.submitLogin(token);
     } else {
@@ -35,7 +43,7 @@ class LoginModel {
   }
 
   clearUser() {
-    localStorage.removeItem('username');
+    localStorage.removeItem('user');
   }
   // TODO: Also need to disable form submission if user didn't enter anythin in the field
 }

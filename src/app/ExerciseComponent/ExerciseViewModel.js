@@ -37,13 +37,14 @@ class ExerciseViewModel {
 
   async getExercises() {
     this.exercises = await this.exerciseModel.fetchExercise();
+    console.log(this.exercises);
     if (!this.exercises) return;
 
     this.exercises.forEach((exercise) => {
       this.createExerciseInstance({
-        input: exercise.value,
+        input: exercise.title,
         timer: exercise.seconds,
-        optionId: exercise.optionId,
+        optionId: exercise.id,
       });
     });
   }

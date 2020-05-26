@@ -22,7 +22,7 @@ class Timer {
     this.intervalId = setInterval(() => {
       this.seconds += 1;
       this.changeTimer(this.seconds);
-    }, 100);
+    }, 1000);
   }
 
   stopTimer() {
