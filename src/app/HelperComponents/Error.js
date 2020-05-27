@@ -14,7 +14,6 @@ class ErrorMsg {
   }
 
   showError(message) {
-    console.log('Show Error Executed');
     this.error.classList.add('show');
     this.error.innerText = message;
 

@@ -7,7 +7,6 @@ class ExerciseModel {
   }
 
   async fetchExercise() {
-    console.log('Fetch Exercise Called');
     // Using POST method to take data from server.
     // If username looks like r1%b_ot then it will be a problem to pass this data with
     // query parameter.
@@ -23,7 +22,6 @@ class ExerciseModel {
         'Content-Type': 'application/json',
       },
     });
-    console.log(response.data);
     if (response.data) {
       return response.data.exercises;
     }

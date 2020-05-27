@@ -6,7 +6,6 @@ import ErrorMsg from '../HelperComponents/Error';
 
 class ExerciseViewModel {
   constructor() {
-    console.log('ExerciseVM initialized');
     this.errorInst = new ErrorMsg();
     this.exerciseView = new ExerciseView(
       {
@@ -37,7 +36,6 @@ class ExerciseViewModel {
 
   async getExercises() {
     this.exercises = await this.exerciseModel.fetchExercise();
-    console.log(this.exercises);
     if (!this.exercises) return;
 
     this.exercises.forEach((exercise) => {

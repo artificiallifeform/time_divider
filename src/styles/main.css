@@ -17,6 +17,16 @@
   src: url('../fonts/Anton-Regular.ttf');
 }
 
+@font-face {
+  font-family: 'RobotoMedium';
+  src: url('../fonts/Roboto-Medium.ttf');
+}
+
+@font-face {
+  font-family: 'RobotoMediumItalic';
+  src: url('../fonts/Roboto-MediumItalic.ttf');
+}
+
 .container {
   border: 1px solid red;
   max-width: 700px;

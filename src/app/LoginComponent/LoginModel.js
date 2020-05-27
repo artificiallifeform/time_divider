@@ -23,7 +23,6 @@ class LoginModel {
         username: response.data.username,
         id: response.data.id,
       });
-      console.log(response.data, 'Fetching user');
       const user = {
         username: response.data.username,
       };

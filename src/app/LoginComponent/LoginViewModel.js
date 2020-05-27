@@ -2,10 +2,6 @@ import '../../styles/header.css';
 import LoginModel from './LoginModel';
 import LoginView from './LoginView';
 
-import ExerciseModel from '../ExerciseComponent/ExerciseModel';
-
-import ExerciseViewModel from '../ExerciseComponent/ExerciseViewModel';
-
 class LoginViewModel {
   constructor() {
     this.loginModel = new LoginModel();

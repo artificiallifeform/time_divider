@@ -14,6 +14,7 @@ class ExerciseInstanceVM {
       {
         inputChange: this.inputChange.bind(this),
         saveBtnClick: this.saveBtnClick.bind(this),
+        deleteBtnClick: this.deleteBtnClick.bind(this),
         startBtnClick: this.startBtnClick.bind(this),
         stopBtnClick: this.stopBtnClick.bind(this),
       },
@@ -24,7 +25,6 @@ class ExerciseInstanceVM {
     // Each Exercise has it's own unique identified
     this.exercise_id = this.options.optionId || null;
 
-    console.log(this.options.input);
     this.exerciseInput = this.options.input || '';
   }
 
@@ -34,15 +34,30 @@ class ExerciseInstanceVM {
 
   inputChange(value) {
     this.exerciseInput = value;
-    console.log(this.exercise_id);
+  }
+
+  deleteBtnClick(e) {
+    // Move up from child to parent to find .exercise-instance class and remove it
+    let parentExercise = null;
+    let i = 0;
+    while (i <= 3) {
+      parentExercise = e.target.parentNode;
+      const classes = Array.from(parentExercise.classList);
+      if (classes.includes('exercise-instance')) {
+        break;
+      } else {
+        parentExercise = parentExercise.parentNode;
+        i++;
+      }
+    }
+    parentExercise.parentNode.removeChild(parentExercise);
+
+    if (this.exercise_id) {
+      this.exerciseInstanceModel.modelDeleteHandler(this.exercise_id);
+    }
   }
 
   async saveBtnClick() {
-    console.log(this.exercise_id);
-    // TODO:
-    // TODO:  To Make another method OR to update existing
-    // TODO:  For beeing able to save current exercise
-    // TODO:  ANd update it in database
     const seconds = this.exerciseTimer.getAllSeconds();
     const response = await this.exerciseInstanceModel.modelSaveHandler(
       this.exerciseInput,
@@ -52,7 +67,6 @@ class ExerciseInstanceVM {
 
     switch (response.type) {
       case 'success':
-        console.log('Success switch', response);
         this.exercise_id = response.payload.exercise_id;
         return;
       case 'error':
@@ -61,17 +75,16 @@ class ExerciseInstanceVM {
         // Which was passed down to An ExerciseInstance From Exercise-Parent Component
         return this.errorHandler(response.payload);
     }
-    console.log('Ive clicked on exercise with id of: ' + this.exercise_id);
   }
 
   startBtnClick() {
     this.exerciseTimer.startTimer();
-    this.exerciseInstanceModel.modelStartHandler();
+    this.exerciseInstanceView.toggleButtonAccess(true);
   }
 
   stopBtnClick() {
     this.exerciseTimer.stopTimer();
-    this.exerciseInstanceModel.modelStopHandler();
+    this.exerciseInstanceView.toggleButtonAccess(false);
   }
 }
 

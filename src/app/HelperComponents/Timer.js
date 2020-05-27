@@ -19,6 +19,7 @@ class Timer {
   }
 
   startTimer() {
+    this.isRunning = true;
     this.intervalId = setInterval(() => {
       this.seconds += 1;
       this.changeTimer(this.seconds);
@@ -26,6 +27,7 @@ class Timer {
   }
 
   stopTimer() {
+    this.isRunning = false;
     clearInterval(this.intervalId);
   }
 

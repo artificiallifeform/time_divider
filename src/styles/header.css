@@ -8,6 +8,11 @@
 .header_list li:not(:last-child) {
   font-family: 'Anton';
 }
+
+.header_list li:last-child {
+  font-family: 'RobotoMediumItalic';
+}
+
 .login-wrapper {
   display: flex;
   align-items: center;
@@ -44,8 +49,7 @@
   padding: 0.9rem 1.5rem;
 }
 .login-icon {
-  width: 15px;
-  margin-right: 0.5rem;
+  width: 23px;
 }
 
 .input {
