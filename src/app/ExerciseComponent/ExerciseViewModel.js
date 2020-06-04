@@ -16,10 +16,9 @@ class ExerciseViewModel {
 
     this.exerciseModel = new ExerciseModel();
 
-    // this.newInstance = new ExerciseInstanceVM();
-    // this.exerciseView.addExerciseInstance(this.newInstance.getMarkup());
     this.markup = this.exerciseView.createExercise();
     this.getExercises();
+    this.getExerciseTitles();
   }
 
   getMarkup() {
@@ -48,7 +47,12 @@ class ExerciseViewModel {
   }
 
   clearExercises() {
+    //External ==> Used by a login component to clear screen after logging out
     this.exerciseView.clearExercises();
+  }
+
+  getExerciseTitles() {
+    this.exerciseModel.getExerciseTitles();
   }
 
   createExerciseInstance(options = {}) {

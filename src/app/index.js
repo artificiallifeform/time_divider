@@ -8,26 +8,6 @@ import PlanViewModel from './PlanComponent/PlanViewModel';
 import HistoryViewModel from './HistoryComponent/HistoryViewModel';
 import Router from './Router/Router';
 
-function init() {
-  // Init Login Controller
-  new LoginViewModel();
-
-  const eVM = new ExerciseViewModel();
-  const pVM = new PlanViewModel();
-  const hVM = new HistoryViewModel();
-
-  // new Router([
-  //   { component: ExerciseViewModel, path: '/' },
-  //   { component: PlanViewModel, path: '/plan' },
-  //   { component: HistoryViewModel, path: '/history' },
-  // ]);
-  new Router([
-    { component: eVM, path: '/' },
-    { component: pVM, path: '/plan' },
-    { component: hVM, path: '/history' },
-  ]);
-}
-
 class Dispatcher {
   constructor() {}
 
@@ -40,6 +20,7 @@ class Dispatcher {
     loginVM.setExternalMethods({
       getExercises: exerciseVM.getExercises.bind(exerciseVM),
       clearExercises: exerciseVM.clearExercises.bind(exerciseVM),
+      getTitles: exerciseVM.getExerciseTitles.bind(exerciseVM),
     });
 
     new Router([

@@ -6,6 +6,12 @@ class ExerciseView {
 
     this.addButton = document.createElement('button');
     this.exercise = document.createElement('div');
+
+    window.addEventListener('click', () => {
+      const dropdowns = document.querySelectorAll('.dropdown-content.active');
+      if (dropdowns)
+        dropdowns.forEach((dropdown) => dropdown.classList.remove('active'));
+    });
   }
 
   createExercise() {

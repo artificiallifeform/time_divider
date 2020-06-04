@@ -45,6 +45,7 @@ class LoginViewModel {
       this.loginView.authSucceed(user.username);
       // Fetch Request From Exercise Model
       this.externalMethods.getExercises();
+      this.externalMethods.getTitles();
     }
   }
 

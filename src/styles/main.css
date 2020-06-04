@@ -1,7 +1,7 @@
 :root {
   --btnBackground: #25bea0;
   --borderRad: 7px;
-  --borderColor: #f69005;
+  --borderColor: rgb(246, 144, 5);
   --danger: rgb(243, 32, 19);
 }
 

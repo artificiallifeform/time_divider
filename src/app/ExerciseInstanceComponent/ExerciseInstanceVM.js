@@ -12,11 +12,12 @@ class ExerciseInstanceVM {
     this.exerciseInstanceModel = new ExerciseInstanceModel();
     this.exerciseInstanceView = new ExerciseInstanceView(
       {
-        inputChange: this.inputChange.bind(this),
+        setInput: this.setInput.bind(this),
         saveBtnClick: this.saveBtnClick.bind(this),
         deleteBtnClick: this.deleteBtnClick.bind(this),
         startBtnClick: this.startBtnClick.bind(this),
         stopBtnClick: this.stopBtnClick.bind(this),
+        fetchTitles: this.fetchTitles.bind(this),
       },
       this.exerciseTimer,
       this.options.input
@@ -26,14 +27,41 @@ class ExerciseInstanceVM {
     this.exercise_id = this.options.optionId || null;
 
     this.exerciseInput = this.options.input || '';
+
+    this.fetchedTitles = [];
   }
 
   getMarkup() {
     return this.exerciseInstanceView.createExerciseInstance();
   }
 
-  inputChange(value) {
-    this.exerciseInput = value;
+  async setInput(value, action = 'plain') {
+    // Initially set fetchedTitles to empty array to load new titles from server
+    this.fetchedTitles = [];
+    if (action !== 'plain') {
+      this.exerciseInput = value;
+      await this.fetchTitles(value);
+    } else {
+      this.exerciseInput = value;
+    }
+  }
+
+  async fetchTitles(inpVal) {
+    // FetchTitles beeing called in two cases. First => When input changes *setInput* func executes => fetchTitles with inpVal
+    // Second => When input beeing focused, *fetchTitles* beeing invoked without parameter, to fetch 5 most common exercises
+    // onFocus need to retrieve data only once.
+    // In other cases retrieving will be dealt by SetInput func
+    if (this.fetchedTitles.length === 0) {
+      if (inpVal) {
+        this.fetchedTitles = await this.exerciseInstanceModel.fetchTitles(
+          inpVal
+        );
+        this.exerciseInstanceView.createTitleList(this.fetchedTitles.titles);
+        return;
+      }
+      this.fetchedTitles = await this.exerciseInstanceModel.fetchTitles();
+      this.exerciseInstanceView.createTitleList(this.fetchedTitles.titles);
+    }
   }
 
   deleteBtnClick(e) {

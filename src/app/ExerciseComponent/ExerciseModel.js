@@ -4,12 +4,10 @@ import { getJsonStorage } from '../utils/storageParser';
 class ExerciseModel {
   constructor() {
     this.url = 'http://localhost:5000/exercise/getexercise';
+    this.getTitlesUrl = 'http://localhost:5000/exercise/exercisetitles';
   }
 
   async fetchExercise() {
-    // Using POST method to take data from server.
-    // If username looks like r1%b_ot then it will be a problem to pass this data with
-    // query parameter.
     const user_id = getJsonStorage('user').id;
     if (!user_id) return;
     const date = Math.floor(new Date().getTime() / 1000);
@@ -24,6 +22,22 @@ class ExerciseModel {
     });
     if (response.data) {
       return response.data.exercises;
+    }
+  }
+
+  async getExerciseTitles() {
+    const user_id = getJsonStorage('user').id;
+    if (!user_id) return;
+    const response = await axios.get(this.getTitlesUrl, {
+      params: {
+        user_id,
+      },
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    if (response.data) {
+      console.log(response.data.titles);
     }
   }
 }

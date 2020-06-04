@@ -10,6 +10,23 @@ class ExerciseInstanceModel {
     };
 
     this.url = 'http://localhost:5000/exercise/';
+    this.getTitlesUrl = 'http://localhost:5000/exercise/exercisetitles';
+  }
+
+  async fetchTitles(exerciseInput) {
+    const user_id = getJsonStorage('user').id;
+    try {
+      const response = await axios.get(this.getTitlesUrl, {
+        params: {
+          user_id,
+          val: exerciseInput,
+        },
+        ...this.config,
+      });
+      return response.data;
+    } catch (error) {
+      throw new Error(error);
+    }
   }
 
   async modelDeleteHandler(exercise_id) {
@@ -18,9 +35,7 @@ class ExerciseInstanceModel {
         params: {
           exercise_id,
         },
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        ...this.config,
       });
     } catch (error) {
       throw new Error(error);
