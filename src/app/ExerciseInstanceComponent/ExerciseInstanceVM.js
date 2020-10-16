@@ -28,6 +28,8 @@ class ExerciseInstanceVM {
 
     this.exerciseInput = this.options.input || '';
 
+    this.exerciseUpdated = this.options.exerciseUpdated;
+
     this.fetchedTitles = [];
   }
 
@@ -86,6 +88,9 @@ class ExerciseInstanceVM {
   }
 
   async saveBtnClick() {
+    // Messages Exercise Component When Save button of any instance was pressed
+    // and sends to it corresponding title
+    this.options.exerciseUpdated(this.exerciseInput);
     const seconds = this.exerciseTimer.getAllSeconds();
     const response = await this.exerciseInstanceModel.modelSaveHandler(
       this.exerciseInput,

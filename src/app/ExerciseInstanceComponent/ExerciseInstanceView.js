@@ -1,8 +1,6 @@
 import save from '../../fonts/save.svg';
 import clear from '../../fonts/clear.svg';
 
-import debounce from '../utils/debounce';
-
 class ExerciseInstanceView {
   constructor(actions, exerTimer, inputVal = '') {
     this.timer = exerTimer;

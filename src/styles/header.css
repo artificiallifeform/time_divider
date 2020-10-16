@@ -36,6 +36,7 @@
   box-sizing: border-box;
   border-radius: var(--borderRad);
   letter-spacing: 0.8px;
+  cursor: pointer;
 }
 .btn.logout {
   background: var(--borderColor);
@@ -78,4 +79,13 @@
 
 .router-link.active {
   border-bottom: 3px solid var(--borderColor);
+}
+
+@media screen and (max-width: 400px) {
+  .router-link {
+    font-size: 0.9rem;
+  }
+  .login-icon {
+    display: none;
+  }
 }

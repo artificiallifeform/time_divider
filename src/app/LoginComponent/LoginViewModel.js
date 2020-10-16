@@ -37,6 +37,7 @@ class LoginViewModel {
     this.loginModel.clearUser();
     this.loginView.authFailed();
     this.externalMethods.clearExercises();
+    this.externalMethods.clearStatisticsMarkup();
   }
 
   async formSubmit() {
@@ -46,6 +47,7 @@ class LoginViewModel {
       // Fetch Request From Exercise Model
       this.externalMethods.getExercises();
       this.externalMethods.getTitles();
+      this.externalMethods.getStatisticsExercises();
     }
   }
 

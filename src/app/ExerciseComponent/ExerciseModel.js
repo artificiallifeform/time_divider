@@ -21,6 +21,7 @@ class ExerciseModel {
       },
     });
     if (response.data) {
+      console.log('Invoked: ', response.data);
       return response.data.exercises;
     }
   }

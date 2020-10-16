@@ -51,12 +51,12 @@ class ExerciseInstanceModel {
       seconds: secs,
       date,
       exercise_id,
+      last_update: date,
     };
 
     try {
       if (!user_id) throw new Error('You need to login first');
       const response = await axios.post(this.url, payload, this.config);
-
       return { type: 'success', payload: response.data };
     } catch (error) {
       console.error(error.message);

@@ -19,6 +19,8 @@ class ExerciseViewModel {
     this.markup = this.exerciseView.createExercise();
     this.getExercises();
     this.getExerciseTitles();
+
+    this.externalMethods = {};
   }
 
   getMarkup() {
@@ -55,12 +57,22 @@ class ExerciseViewModel {
     this.exerciseModel.getExerciseTitles();
   }
 
+  exerciseUpdated = (title) => {
+    // Being invoked in ExerciseIntanceVM when save button of any instance is pressed
+    this.externalMethods.setStatisticUpdate(title);
+    return { status: 'Updated' };
+  };
+
   createExerciseInstance(options = {}) {
-    let newInstance = new ExerciseInstanceVM(
-      this.handleError.bind(this),
-      options
-    );
+    let newInstance = new ExerciseInstanceVM(this.handleError.bind(this), {
+      ...options,
+      exerciseUpdated: this.exerciseUpdated,
+    });
     this.exerciseView.addExerciseInstance(newInstance.getMarkup());
+  }
+
+  setExternalMethods(methods) {
+    this.externalMethods = methods;
   }
 }
 
