@@ -1,4 +1,4 @@
-export const formatSeconds = (seconds) => {
+export default (seconds) => {
   let secs = 0;
   let mins = 0;
   let hrs = 0;

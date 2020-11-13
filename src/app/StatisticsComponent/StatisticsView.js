@@ -95,6 +95,7 @@ class StatisticsView {
 
   clearMarkup() {
     this.statistics.innerHTML = '';
+    this.exerciseList.innerHTML = '';
   }
 
   eventListeners() {
@@ -109,11 +110,11 @@ class StatisticsView {
       }
     });
 
-    this.timeIntervals.addEventListener('click', (e) => {
-      if (e.target.dataset.interval) {
-        // this.getIntervalData(e.target.dataset.interval);
-      }
-    });
+    // this.timeIntervals.addEventListener('click', (e) => {
+    //   if (e.target.dataset.interval) {
+    //     // this.getIntervalData(e.target.dataset.interval);
+    //   }
+    // });
   }
 
   addClasses() {

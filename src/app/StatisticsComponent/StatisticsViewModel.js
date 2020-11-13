@@ -4,8 +4,7 @@ import StatisticsModel from './StatisticsModel';
 
 import GoalViewModel from '../GoalComponent/GoalViewModel';
 
-import { formatSeconds } from '../utils/formatSeconds';
-import isEmpty from '../utils/emptyObj';
+import formatSeconds from '../utils/formatSeconds';
 
 class StatisticsViewModel {
   constructor() {
@@ -27,11 +26,11 @@ class StatisticsViewModel {
     this.goalViewModel = new GoalViewModel();
     this.goalViewModel.setExternalMethods({
       fetchGoals: this.fetchGoals.bind(this),
+      delGoal: this.delGoal.bind(this),
     });
   }
 
   getMarkup() {
-    console.log('Invoked');
     // Get markup is wrong name for this shit. It was better to choose <render> name
     // cause except providing markup it will fetch current goals
     this.fetchGoals();
@@ -39,7 +38,6 @@ class StatisticsViewModel {
   }
 
   fetchGoals() {
-    console.log('Fetch goals Invoked');
     this.statisticsModel
       .fetchGoals()
       .then((response) => {
@@ -91,10 +89,14 @@ class StatisticsViewModel {
     this.statisticsView.renderTimeInterval(
       this.exercisesStatistics[exercise].stats
     );
-
     // This markup is provided by goal component
     this.goalViewModel.setCurrentExercise(exercise);
+    this.goalViewModel.renderAddButton();
     this.updateGoalsWidget();
+  }
+
+  delGoal(id) {
+    this.goals = this.goals.filter((goal) => goal.id !== id);
   }
 
   updateGoalsWidget() {

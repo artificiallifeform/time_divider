@@ -12,6 +12,10 @@
   font-size: 16px;
 }
 
+body {
+  position: relative;
+}
+
 @font-face {
   font-family: 'Anton';
   src: url('../fonts/Anton-Regular.ttf');
@@ -28,9 +32,8 @@
 }
 
 .container {
-  border: 1px solid red;
   max-width: 800px;
-  height: 100vh;
+  min-height: 100vh;
   margin: 0 auto;
 }
 
@@ -46,7 +49,7 @@
 
 .modal {
   position: absolute;
-  height: 100vh;
+  height: 100%;
   width: 100%;
   background: rgba(0,0,0,0.3);
 }
@@ -67,3 +70,5 @@
   flex-direction: column;
 
 }
+
+/* Start of testing  */

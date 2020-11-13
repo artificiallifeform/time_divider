@@ -2,10 +2,9 @@ import 'regenerator-runtime/runtime.js';
 import '../styles/main.css';
 
 import LoginViewModel from './LoginComponent/LoginViewModel';
-// import ExerciseInstanceVM from './ExerciseInstanceComponent/ExerciseInstanceVM';
 import ExerciseViewModel from './ExerciseComponent/ExerciseViewModel';
-import PlanViewModel from './PlanComponent/PlanViewModel';
 import StatisticsViewModel from './StatisticsComponent/StatisticsViewModel';
+import GoalsHistoryViewModel from './GoalsHistoryComponent/GoalsHistoryViewModel';
 import Router from './Router/Router';
 
 class Dispatcher {
@@ -14,7 +13,7 @@ class Dispatcher {
   init() {
     const loginVM = new LoginViewModel();
     const exerciseVM = new ExerciseViewModel();
-    const planVM = new PlanViewModel();
+    const goalsHistoryVM = new GoalsHistoryViewModel();
     const statisticsVM = new StatisticsViewModel();
 
     loginVM.setExternalMethods({
@@ -23,22 +22,18 @@ class Dispatcher {
       getTitles: exerciseVM.getExerciseTitles.bind(exerciseVM),
       getStatisticsExercises: statisticsVM.fetchExercises.bind(statisticsVM),
       clearStatisticsMarkup: statisticsVM.clearMarkup.bind(statisticsVM),
+      getGoalsHistory: goalsHistoryVM.getGoalsHistory.bind(goalsHistoryVM),
+      clearGoalsHistory: goalsHistoryVM.clearGoalsHistory.bind(goalsHistoryVM),
     });
 
     exerciseVM.setExternalMethods({
       setStatisticUpdate: statisticsVM.setStatisticsUpdate.bind(statisticsVM),
     });
 
-    // new Router([
-    //   { component: exerciseVM, path: '/' },
-    //   { component: planVM, path: '/plan' },
-    //   { component: statisticsVM, path: '/statistics' },
-    // ]);
-
     new Router([
-      { component: statisticsVM, path: '/' },
-      { component: planVM, path: '/plan' },
-      { component: exerciseVM, path: '/statistics' },
+      { component: statisticsVM, path: '/statistics' },
+      { component: goalsHistoryVM, path: '/goalshistory' },
+      { component: exerciseVM, path: '/' },
     ]);
   }
 }

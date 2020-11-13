@@ -3,8 +3,8 @@ import { getJsonStorage } from '../utils/storageParser';
 
 class ExerciseModel {
   constructor() {
-    this.url = 'http://localhost:5000/exercise/getexercise';
-    this.getTitlesUrl = 'http://localhost:5000/exercise/exercisetitles';
+    this.url = 'api/exercise/getexercise';
+    this.getTitlesUrl = 'api/exercise/exercisetitles';
   }
 
   async fetchExercise() {
@@ -21,7 +21,6 @@ class ExerciseModel {
       },
     });
     if (response.data) {
-      console.log('Invoked: ', response.data);
       return response.data.exercises;
     }
   }
@@ -38,7 +37,6 @@ class ExerciseModel {
       },
     });
     if (response.data) {
-      console.log(response.data.titles);
     }
   }
 }

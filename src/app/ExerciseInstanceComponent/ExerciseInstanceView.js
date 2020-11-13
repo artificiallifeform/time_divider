@@ -124,15 +124,15 @@ class ExerciseInstanceView {
     }
   }
 
-  showDropDown = () => {
+  showDropDown() {
     this.dropdownContent.classList.add('active');
-  };
+  }
 
-  hideDropDown = () => {
+  hideDropDown() {
     this.list.innerHTML = '';
     const dropdowns = document.querySelectorAll('.dropdown-content');
     dropdowns.forEach((dropdown) => dropdown.classList.remove('active'));
-  };
+  }
 
   addClasses() {
     this.exerciseWrapper.classList.add('exercise-instance');

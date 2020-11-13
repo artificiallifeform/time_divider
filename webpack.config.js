@@ -10,12 +10,12 @@ let plugins = [
   // new CleanWebpackPlugin(),
   new HtmlWebpackPlugin({
     title: 'Development',
-    template: 'src/index.html'
+    template: 'src/index.html',
   }),
   new MiniCssExtractPlugin({
-    filename: 'styles/main.css'
-  })
-]
+    filename: 'styles/main.css',
+  }),
+];
 
 let optimization = {
   splitChunks: {
@@ -23,27 +23,27 @@ let optimization = {
       commons: {
         test: /[\\/]node_modules[\\/]/,
         chunks: 'all',
-        name: 'vendor.bundle'
-      }
-    }
-  }
-}
+        name: 'vendor.bundle',
+      },
+    },
+  },
+};
 
 module.exports = (env, argv) => {
   function babelConf() {
-    if(argv.mode === 'development') {
+    if (argv.mode === 'development') {
       return {
         test: /\.js$/i,
         exclude: /(node_modules)/,
         loader: 'babel-loader',
         options: {
           presets: ['@babel/preset-env'],
-          plugins: ['@babel/plugin-proposal-class-properties']
-        }
-      }
+          plugins: ['@babel/plugin-proposal-class-properties'],
+        },
+      };
     } else {
-      return {}
-    }  
+      return {};
+    }
   }
 
   var bbl = babelConf();
@@ -57,19 +57,19 @@ module.exports = (env, argv) => {
       path: path.resolve(__dirname, 'dist'),
       chunkFilename: '[name].[chunkhash].js',
       filename: '[name].[chunkhash].bundle.js',
-      publicPath: ''
+      publicPath: '',
     },
     devServer: {
       contentBase: path.join(__dirname, '/dist'),
       stats: {
-        maxModules: 5
-      }
+        maxModules: 5,
+      },
     },
     module: {
       rules: [
         {
           test: /\.css$/i,
-          use: [ MiniCssExtractPlugin.loader ,'css-loader']
+          use: [MiniCssExtractPlugin.loader, 'css-loader'],
         },
         {
           test: /\.(ttf)$/i,
@@ -77,8 +77,8 @@ module.exports = (env, argv) => {
           options: {
             outputPath: 'fonts',
             name: '[name].[ext]',
-            publicPath: '../fonts'
-          }
+            publicPath: '../fonts',
+          },
         },
         {
           test: /\.svg$/i,
@@ -86,8 +86,8 @@ module.exports = (env, argv) => {
           options: {
             outputPath: 'fonts',
             name: '[name].[ext]',
-            publicPath: './fonts'
-          }
+            publicPath: './fonts',
+          },
         },
         {
           test: /\.jpg$/i,
@@ -95,14 +95,13 @@ module.exports = (env, argv) => {
           options: {
             outputPath: 'images',
             name: '[name].[ext]',
-            publicPath: './images'
-          }
+            publicPath: './images',
+          },
         },
-        bbl // Babel Config. To transpile code only in production mode
-      ]
+        bbl, // Babel Config. To transpile code only in production mode
+      ],
     },
     plugins,
     optimization,
-  }
-  
-}
+  };
+};

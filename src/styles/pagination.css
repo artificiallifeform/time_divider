@@ -1,0 +1,24 @@
+.pagination {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 0.5rem;
+    padding: 0.3rem 0;
+}
+
+.pagination span {
+    padding: 0.3rem 0.6rem;
+    margin-right: 0.3rem;
+    cursor: pointer;
+    border-radius: var(--borderRad);
+    border: 2px solid #25BEA0;
+    transition: transform 0.1s linear;
+}
+
+.pagination .active {
+    transform: scale(1.2);
+}
+
+.pagination span:hover {
+    transform: scale(1.2);
+}

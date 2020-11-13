@@ -1,4 +1,4 @@
-import { formatSeconds } from './formatSeconds';
+import formatSeconds from './formatSeconds';
 
 export default (interval, data) => {
   let curDate = new Date(new Date().toISOString().split('T')[0] + 'T00:00:00');
@@ -18,7 +18,6 @@ export default (interval, data) => {
     let tDate = new Date(`${onlyExerciseDate}T00:00:00`);
 
     if (interval === 1 && tDate < curDate && tDate >= dateInterval) {
-      console.log('Executed');
       totalSeconds += exercise.seconds;
     } else if (interval !== 1 && tDate >= dateInterval) {
       totalSeconds += exercise.seconds;

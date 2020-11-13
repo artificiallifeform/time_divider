@@ -3,13 +3,12 @@ import { getJsonStorage } from '../utils/storageParser';
 
 class StatisticsModel {
   constructor() {
-    console.log('Statistics Model initialized');
     this.headers = {
       'Content-Type': 'application/json',
     };
 
-    this.url = 'http://localhost:5000/statistics/';
-    this.goal_url = 'http://localhost:5000/goals/';
+    this.url = 'api/statistics/';
+    this.goal_url = 'api/goals/';
   }
 
   async fetchExercises() {

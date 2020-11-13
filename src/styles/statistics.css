@@ -15,6 +15,15 @@
   padding: 0.2rem 0.2rem;
 }
 
+
+.statistics-list li:hover {
+  color: blue;
+  text-decoration: underline;
+  text-decoration-color: var(--borderColor);
+  background-color: #d1ecf1;
+  border-radius: var(--borderRad);
+}
+
 .statistics-list .active {
   color: blue;
   text-decoration: underline;

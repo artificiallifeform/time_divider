@@ -24,10 +24,12 @@
 }
 
 .goal-state {
+    position: relative;
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 0.8rem;
 }
 
 .goal-graph {
@@ -37,6 +39,38 @@
     border-radius: var(--borderRad);
     position: relative;
     box-sizing: content-box;
+}
+
+.goal-actions img {
+    background: var(--danger);
+    height: 1.1rem;
+    border-radius: var(--borderRad);
+    padding: 0.05rem;
+    box-sizing: content-box;
+    cursor: pointer;
+    margin-right: 0.25rem;
+}
+
+.goal-actions .info {
+    height: 1.1rem;
+    position: absolute;
+    top: -3px;
+    color: red;
+    left: 60%;
+}
+
+.info span {
+    font-size: 0.8rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.info .active {
+    animation: slide 0.2s linear;
+    animation-fill-mode: forwards;
+}
+.goal-actions img:nth-child(2) {
+    margin-left: 0.25rem;
+    background:none;
 }
 
 .progress-graph {
@@ -49,4 +83,37 @@
     position: absolute;
     top: 0;
     left: 0;
+}
+
+.form-wrapper {
+    padding: 2rem;
+    border: 2px solid var(--borderColor);
+    background: #fff;
+    border-radius: var(--borderRad);
+}
+
+.modal-form > *:not(:last-child) {
+    border: 2px solid transparent;
+    border-bottom: 2px solid var(--borderColor);
+    border-radius: var(--borderRad);
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    margin-bottom: 1rem;
+    transition: border 0.3s ease;
+}
+.modal-form > *:not(:last-child):focus {
+    outline: none;
+    border: 2px solid var(--borderColor);
+    border-radius: var(--borderRad);
+}
+
+.modal-form > input {
+    padding: 0.3rem;
+}
+
+
+@keyframes slide {
+    100% {
+        opacity: 1;
+    }
 }

@@ -57,16 +57,16 @@ class ExerciseViewModel {
     this.exerciseModel.getExerciseTitles();
   }
 
-  exerciseUpdated = (title) => {
+  exerciseUpdated(title) {
     // Being invoked in ExerciseIntanceVM when save button of any instance is pressed
     this.externalMethods.setStatisticUpdate(title);
     return { status: 'Updated' };
-  };
+  }
 
   createExerciseInstance(options = {}) {
     let newInstance = new ExerciseInstanceVM(this.handleError.bind(this), {
       ...options,
-      exerciseUpdated: this.exerciseUpdated,
+      exerciseUpdated: (title) => this.exerciseUpdated(title),
     });
     this.exerciseView.addExerciseInstance(newInstance.getMarkup());
   }

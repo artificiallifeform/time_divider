@@ -8,10 +8,26 @@ class LoginModel {
         'Content-Type': 'application/json',
       },
     };
-    this.url = 'http://localhost:5000/auth/';
+    this.url = 'api/auth/';
+  }
+
+  async controlExpiredGoals() {
+    // Check if there are any goals deadline run out of time
+    // And set their status expired to 1 When user loggs in
+    const date = Math.floor(new Date().getTime() / 1000);
+    const user_id = getJsonStorage('user').id;
+
+    const url = 'api/goals/expire';
+    try {
+      await axios.post(url, { date, user_id }, this.config);
+    } catch (error) {
+      console.error('Error while trying to update expired goals');
+    }
   }
 
   async submitLogin(username) {
+    const date = Math.floor(new Date().getTime() / 1000);
+
     if (username.length === 0) {
       console.warn('Input cant be empty');
       return;
@@ -26,6 +42,7 @@ class LoginModel {
       const user = {
         username: response.data.username,
       };
+      await this.controlExpiredGoals(date, response.data.id);
       return user;
     } catch (err) {
       throw Error('Something wrong with an API');

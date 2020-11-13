@@ -15,7 +15,7 @@ class Router {
         this.activeLink = el;
         this.activeLink.classList.add('active');
       }
-      el.addEventListener('click', this.linkEvent);
+      el.addEventListener('click', (e) => this.linkEvent(e));
     });
 
     // When users steps back to previous route in history object
@@ -35,7 +35,7 @@ class Router {
     this.renderComponent(this.path, 'freeze');
   }
 
-  linkEvent = (e) => {
+  linkEvent(e) {
     e.preventDefault();
 
     this.path = e.target.getAttribute('href');
@@ -43,7 +43,7 @@ class Router {
     this.highlightActiveLink(e.target);
 
     this.renderComponent(this.path, 'push');
-  };
+  }
 
   highlightActiveLink(currentLink) {
     this.activeLink.classList.remove('active');
@@ -57,10 +57,15 @@ class Router {
     const { components, workSpace } = this;
     let Screen = null;
     for (let element of components) {
-      if (element.path === path) Screen = element.component;
+      if (element.path === path) {
+        Screen = element.component;
+      }
     }
     let screenContent = Screen.getMarkup();
-    workSpace.removeChild(workSpace.childNodes[0]);
+
+    if (workSpace.childNodes.length !== 0) {
+      workSpace.removeChild(workSpace.childNodes[0]);
+    }
     workSpace.appendChild(screenContent);
     // Function is beeing called two times. First, when users clicks on link
     // and it's path beeing pushed into history object.

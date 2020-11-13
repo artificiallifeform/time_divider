@@ -9,8 +9,8 @@ class ExerciseInstanceModel {
       },
     };
 
-    this.url = 'http://localhost:5000/exercise/';
-    this.getTitlesUrl = 'http://localhost:5000/exercise/exercisetitles';
+    this.url = 'api/exercise/';
+    this.getTitlesUrl = 'api/exercisetitles';
   }
 
   async fetchTitles(exerciseInput) {

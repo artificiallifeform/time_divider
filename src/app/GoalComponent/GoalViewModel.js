@@ -5,13 +5,15 @@ import GoalView from './GoalView';
 
 import format_secs from '../utils/timeFromSecs';
 
+// TODO: this.goals stores all goals. Implement deleting
+
 class GoalViewModel {
   constructor() {
-    console.log('Goal view model initialized');
-
     this.goalModel = new GoalModel();
     this.goalView = new GoalView({
       addGoal: this.addGoal.bind(this),
+      delGoal: this.delGoal.bind(this),
+      infoGoal: this.infoGoal.bind(this),
     });
 
     this.markup = this.goalView.createGoals();
@@ -23,9 +25,6 @@ class GoalViewModel {
   }
 
   async addGoal(data) {
-    // this.goalView.
-    console.log('Add Goal IN GOAL VM invoked');
-    console.log(data);
     const goal_id = await this.goalModel.postGoal({
       ...data,
       title: this.currentExercise,
@@ -35,15 +34,49 @@ class GoalViewModel {
       this.goalView.createGoalGraph(
         { hours: 0, mins: 0 },
         data.timeHours,
-        data.timeMins
+        data.timeMins,
+        goal_id.goal_id
       );
     }
 
     this.externalMethods.fetchGoals();
   }
 
+  infoGoal(id) {
+    let expirationT = {};
+    this.goals.forEach((goal) => {
+      if (goal.id === id) {
+        expirationT = this.calcExpiration(goal.expiration);
+      }
+    });
+    return expirationT;
+  }
+
+  calcExpiration(time) {
+    const expiration = new Date(time.split('Z').join('0')).getTime();
+    const now = new Date().getTime();
+    const diff = expiration - now;
+    const minutes = Math.floor(diff / (1000 * 60));
+
+    const infoTime = { hours: 0, mins: 0 };
+    infoTime.mins = minutes % 60;
+    infoTime.hours = (minutes - infoTime.mins) / 60;
+    return infoTime;
+  }
+
+  delGoal(id) {
+    this.goalModel.delGoal(id);
+    this.externalMethods.delGoal(id);
+  }
+
   getMarkup() {
     return this.markup;
+  }
+
+  renderAddButton() {
+    // adds goal widget manualy to show it only
+    // after pressing any exercise
+    this.goalView.createGoalAdd();
   }
 
   setCurrentExercise(exercise) {
@@ -62,7 +95,8 @@ class GoalViewModel {
         this.goalView.createGoalGraph(
           time_spent,
           goal_time.hours,
-          goal_time.mins
+          goal_time.mins,
+          goal.id
         );
       }
     }

@@ -9,7 +9,7 @@ class GoalModel {
       },
     };
 
-    this.postGoalUrl = 'http://localhost:5000/goals/';
+    this.goalUrl = 'api/goals/';
   }
 
   async postGoal(data) {
@@ -25,18 +25,23 @@ class GoalModel {
     };
 
     try {
-      const response = await axios.post(
-        this.postGoalUrl,
-        goal_data,
-        this.config
-      );
+      const response = await axios.post(this.goalUrl, goal_data, this.config);
 
       return response.data;
     } catch (error) {
       throw new Error(error);
     }
+  }
 
-    console.log('Sending data to a server to create goal', data);
+  async delGoal(id) {
+    try {
+      await axios.delete(this.goalUrl, {
+        data: { id, user_id: getJsonStorage('user').id },
+        ...this.config,
+      });
+    } catch (error) {
+      throw new Error(error);
+    }
   }
 }
 
